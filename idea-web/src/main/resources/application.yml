@@ -1,0 +1,8 @@
+server:
+    port: 10000
+    context-path: /demo
+    undertow:
+        io-threads: 4
+        worker-threads: 20
+        buffer-size: 1024
+        direct-buffers: true
