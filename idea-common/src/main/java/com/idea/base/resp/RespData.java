@@ -1,4 +1,4 @@
-package com.idea.resp;
+package com.idea.base.resp;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

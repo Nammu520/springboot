@@ -40,6 +40,10 @@
             <groupId>com.idea</groupId>
             <artifactId>idea-common</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.idea</groupId>
+            <artifactId>idea-service</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

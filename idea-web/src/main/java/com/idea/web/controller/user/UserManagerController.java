@@ -1,9 +1,9 @@
-package com.idea.web.controller;
+package com.idea.web.controller.user;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.idea.resp.CommonRespData;
+import com.idea.base.resp.CommonRespData;
 
 @RestController
 @RequestMapping("/uc")

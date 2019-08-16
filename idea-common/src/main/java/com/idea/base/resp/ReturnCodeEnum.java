@@ -1,4 +1,4 @@
-package com.idea.resp;
+package com.idea.base.resp;
 
 /**
  * @author dengyu
@@ -23,7 +23,10 @@ public enum ReturnCodeEnum {
 
     ERROR_TIMEOUT(408, "请求超时，请稍后再试"),
 
-    ERROR_INTERNAL_SERVER(500, "操作失败，请稍后再试");
+    ERROR_INTERNAL_SERVER(500, "操作失败，请稍后再试"),
+
+    // 鉴权模块
+    ERROR_GENERATE_TOKEN(10001, "生成全局token异常");
 
     private int code;
 
