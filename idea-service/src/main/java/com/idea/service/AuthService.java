@@ -11,13 +11,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
-
 @Slf4j
 @Component
 public class AuthService {
 
-    @Resource
+    @Autowired
     private LocaleMessageSourceService messageSourceService;
 
     @Autowired

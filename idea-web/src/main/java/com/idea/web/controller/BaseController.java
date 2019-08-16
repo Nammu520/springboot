@@ -8,8 +8,7 @@ import com.idea.service.AuthService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.annotation.Resource;
+import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * @author dengyu
@@ -17,13 +16,14 @@ import javax.annotation.Resource;
  * @date 2019/3/25
  */
 @Slf4j
+@ApiIgnore
 public class BaseController {
 
     private static ThreadLocal<String> loginUserTicketThreadLocal = new ThreadLocal<>();
 
     private static ThreadLocal<Integer> userIdThreadLocal = new ThreadLocal<>();
 
-    @Resource
+    @Autowired
     private LocaleMessageSourceService messageSourceService;
 
     @Autowired
