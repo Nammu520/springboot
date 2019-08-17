@@ -74,6 +74,9 @@ public class SecurityInterceptor extends WebMvcConfigurerAdapter {
             if ("OPTIONS".equals(httpMethod)) {
                 return true;
             }
+            if(checkIsWhite(request.getRequestURI(), httpMethod)){
+                return true;
+            }
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             if (handlerMethod.getBean() instanceof BaseController) {
                 BaseController baseController = (BaseController) handlerMethod.getBean();
@@ -90,7 +93,7 @@ public class SecurityInterceptor extends WebMvcConfigurerAdapter {
                         }
                     }
                 }
-                if (!checkIsWhite(request.getRequestURI(), httpMethod) || !baseController.hasAuth(ticket)) {
+                if (!baseController.hasAuth(ticket)) {
                     response.setCharacterEncoding(CommonConstant.CHARSET_UTF8);
                     response.setContentType("application/json; charset=utf-8");
                     response.setStatus(HttpServletResponse.SC_OK);

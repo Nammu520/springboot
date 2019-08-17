@@ -19,9 +19,8 @@ spring:
             minIdle: 0
         timeout: 0
     datasource:
-        type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://127.0.0.1:3306/base
-        username: local
+        url: jdbc:mysql://127.0.0.1:3306/vcl_aggregate
+        username: root
         password: 123456
         driverClassName: com.mysql.jdbc.Driver
         hikari:
