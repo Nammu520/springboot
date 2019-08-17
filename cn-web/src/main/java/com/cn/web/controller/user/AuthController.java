@@ -47,7 +47,10 @@ public class AuthController extends BaseController {
     @ApiOperation(value = "登出", notes = "登出")
     @PostMapping("/login/")
     public RespData login() {
-        authService.login(getUserId());
+        // TODO 判断账号密码是否正确
+        Integer userId = 1;
+        // 生成ticket
+        authService.login(userId);
         return RespData.getInstance().success();
     }
 }

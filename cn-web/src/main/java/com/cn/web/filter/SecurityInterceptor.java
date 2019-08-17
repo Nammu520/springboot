@@ -47,8 +47,6 @@ public class SecurityInterceptor extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         InterceptorRegistration interceptor = registry.addInterceptor(getSessionInterceptor());
-        // 排除配置，这里面的的过滤列表是不会经过装载用户信息。所以些接口内数据不能跟用户相关
-
         // (Swagger)
         interceptor.excludePathPatterns("/swagger-ui.html");
         interceptor.excludePathPatterns("/webjars/**");
@@ -58,6 +56,8 @@ public class SecurityInterceptor extends WebMvcConfigurerAdapter {
         // 拦截配置
         interceptor.addPathPatterns("/**");
 
+        // 微信接口
+        interceptor.excludePathPatterns("/weixin/**");
     }
 
     /**
@@ -90,7 +90,7 @@ public class SecurityInterceptor extends WebMvcConfigurerAdapter {
                         }
                     }
                 }
-                if (!baseController.hasAuth(ticket) || !checkIsWhite(request.getRequestURI(), httpMethod)) {
+                if (!checkIsWhite(request.getRequestURI(), httpMethod) || !baseController.hasAuth(ticket)) {
                     response.setCharacterEncoding(CommonConstant.CHARSET_UTF8);
                     response.setContentType("application/json; charset=utf-8");
                     response.setStatus(HttpServletResponse.SC_OK);
