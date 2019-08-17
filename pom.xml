@@ -10,15 +10,15 @@
         <version>1.5.10.RELEASE</version>
         <relativePath/>
     </parent>
-    <groupId>com.idea</groupId>
-    <artifactId>idea-root</artifactId>
+    <groupId>com.cn</groupId>
+    <artifactId>cn-root</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
     <modules>
-        <module>idea-web</module>
-        <module>idea-common</module>
-        <module>idea-dao</module>
-        <module>idea-service</module>
+        <module>cn-web</module>
+        <module>cn-common</module>
+        <module>cn-dao</module>
+        <module>cn-service</module>
     </modules>
 
     <properties>
@@ -36,7 +36,7 @@
         <slf4j.version>1.7.25</slf4j.version>
         <logback.version>1.2.3</logback.version>
         <logstash-logback-encoder.version>5.0</logstash-logback-encoder.version>
-        <springfox.version>2.9.0</springfox.version>
+        <springfox.version>2.7.0</springfox.version>
         <mysql-connector.version>5.1.46</mysql-connector.version>
         <hikaricp.version>3.1.0</hikaricp.version>
         <httpclient.version>4.4.1</httpclient.version>
@@ -51,7 +51,7 @@
         <skip-maven-deploy>false</skip-maven-deploy>
         <aspectj.version>1.9.1</aspectj.version>
         <!-- 内部模块依赖-->
-        <idea.version>1.0.0</idea.version>
+        <cn.version>1.0.0</cn.version>
     </properties>
 
     <dependencyManagement>
@@ -153,19 +153,19 @@
 
             <!-- 内部模块依赖 -->
             <dependency>
-                <groupId>com.idea</groupId>
-                <artifactId>idea-common</artifactId>
-                <version>${idea.version}</version>
+                <groupId>com.cn</groupId>
+                <artifactId>cn-common</artifactId>
+                <version>${cn.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.idea</groupId>
-                <artifactId>idea-service</artifactId>
-                <version>${idea.version}</version>
+                <groupId>com.cn</groupId>
+                <artifactId>cn-service</artifactId>
+                <version>${cn.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.idea</groupId>
-                <artifactId>idea-dao</artifactId>
-                <version>${idea.version}</version>
+                <groupId>com.cn</groupId>
+                <artifactId>cn-dao</artifactId>
+                <version>${cn.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
