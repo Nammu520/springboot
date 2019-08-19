@@ -19,7 +19,7 @@ public final class RedisConstants {
 
     }
 
-    public static final String KLI_ADMIN = "admin";
+    public static final String ADMIN = "admin";
 
     public static final String USER = "user";
 
@@ -40,7 +40,7 @@ public final class RedisConstants {
      * @return admin ticket缓存key
      */
     public static String getAdminTicketKey(String key) {
-        return CommonUtil.stringAppend(KLI_ADMIN, SpecialSymbol.COLON,
+        return CommonUtil.stringAppend(ADMIN, SpecialSymbol.COLON,
                 CommonConstant.TICKET, SpecialSymbol.COLON, key).toString();
     }
 
