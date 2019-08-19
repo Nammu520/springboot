@@ -4,6 +4,7 @@ package com.cn.base.resp;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -20,6 +21,7 @@ public class RespData<T> implements Serializable {
     @ApiModelProperty(name = "code", value = "响应编码（0表示正常，400表示请求异常，500表示服务器异常）", example = "0", allowableValues = "0,400,500")
     private int code;
     @ApiModelProperty(name = "data", value = "响应数据")
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private T data;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @ApiModelProperty(name = "msg", value = "响应消息", example = "请求成功")

@@ -1,7 +1,7 @@
 package com.cn.base.exception;
 
 /**
- * @author leixiaoming
+ * @author dengyu
  * @desc
  * @date 2019/05/16
  */

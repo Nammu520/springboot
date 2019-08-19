@@ -35,7 +35,7 @@ public class AuthController extends BaseController {
     @PostMapping("/logout/")
     public RespData logout() {
         String ticket = getTicket();
-        authService.logout(getUserId(), ticket);
+        authService.logout(ticket);
         return RespData.getInstance().success();
     }
 

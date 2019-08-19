@@ -141,24 +141,24 @@ public final class SecretUtil {
 
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
-        String encrypt = SecretUtil.encrypt("sssssssssssss", "leixiaoming");
+        String encrypt = SecretUtil.encrypt("sssssssssssss", "dengyu");
         System.out.println(encrypt);
         System.out.println((System.currentTimeMillis() - start));
-        String leixiaoming = SecretUtil.decrypt(encrypt, "leixiaoming");
-        System.out.println(leixiaoming);
+        String dengyu = SecretUtil.decrypt(encrypt, "dengyu");
+        System.out.println(dengyu);
         System.out.println((System.currentTimeMillis() - start));
 
-        leixiaoming = SecretUtil.decrypt(encrypt, "leixiaoming");
-        System.out.println(leixiaoming);
+        dengyu = SecretUtil.decrypt(encrypt, "dengyu");
+        System.out.println(dengyu);
         System.out.println((System.currentTimeMillis() - start));
-        leixiaoming = SecretUtil.decrypt(encrypt, "leixiaoming");
-        System.out.println(leixiaoming);
+        dengyu = SecretUtil.decrypt(encrypt, "dengyu");
+        System.out.println(dengyu);
         System.out.println((System.currentTimeMillis() - start));
-        leixiaoming = SecretUtil.decrypt(encrypt, "leixiaoming");
-        System.out.println(leixiaoming);
+        dengyu = SecretUtil.decrypt(encrypt, "dengyu");
+        System.out.println(dengyu);
         System.out.println((System.currentTimeMillis() - start));
-        leixiaoming = SecretUtil.decrypt(encrypt, "leixiaoming");
-        System.out.println(leixiaoming);
+        dengyu = SecretUtil.decrypt(encrypt, "dengyu");
+        System.out.println(dengyu);
         System.out.println((System.currentTimeMillis() - start));
     }
 

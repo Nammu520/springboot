@@ -1,13 +1,18 @@
 package com.cn.web.filter;
 
+import com.cn.base.config.RedisDao;
 import com.cn.base.constant.CommonConstant;
+import com.cn.base.constant.RedisConstants;
 import com.cn.base.constant.SpecialSymbol;
 import com.cn.base.resp.CommonRespData;
 import com.cn.base.resp.ReturnCodeEnum;
 import com.cn.base.util.CommonUtil;
+import com.cn.base.util.CookieUtil;
 import com.cn.base.util.JSONUtil;
 import com.cn.web.controller.BaseController;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.HandlerMethod;
@@ -24,7 +29,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
- * @author leixiaoming
+ * @author dengyu
  * @desc 登录配置
  * @date 2019/4/18
  */
@@ -32,12 +37,8 @@ import java.util.regex.Pattern;
 @Configuration
 public class SecurityInterceptor extends WebMvcConfigurerAdapter {
 
-    /**
-     * 这里面的记录表示用户可能有登录，也有可能未登录的过滤列表
-     */
-    public static final List<String> WHITE_LIST_WITH_METHOD = new ArrayList() {{
-        //
-    }};
+    @Autowired
+    private RedisDao redisDao;
 
     @Bean
     public SessionInterceptor getSessionInterceptor() {
@@ -61,7 +62,7 @@ public class SecurityInterceptor extends WebMvcConfigurerAdapter {
     }
 
     /**
-     * @author leixiaoming
+     * @author dengyu
      * @desc
      * @date 2019/4/18
      */
@@ -74,54 +75,33 @@ public class SecurityInterceptor extends WebMvcConfigurerAdapter {
             if ("OPTIONS".equals(httpMethod)) {
                 return true;
             }
-            if(checkIsWhite(request.getRequestURI(), httpMethod)){
-                return true;
+            String ticket = request.getHeader(CommonConstant.TICKET);
+            if (ticket == null || ticket.length() == 0) { //兼容直接在header中传递ticket和在cookies中传递ticket两种方式
+                ticket = CookieUtil.getCookie(CommonConstant.TICKET);
             }
-            HandlerMethod handlerMethod = (HandlerMethod) handler;
-            if (handlerMethod.getBean() instanceof BaseController) {
-                BaseController baseController = (BaseController) handlerMethod.getBean();
-                baseController.cleanLocalThread();
-                String ticket = request.getHeader(CommonConstant.TICKET);
-                if (ticket == null || ticket.length() == 0) { //兼容直接在header中传递ticket和在cookies中传递ticket两种方式
-                    Cookie[] cookies = request.getCookies();
-                    if (cookies != null && cookies.length > 0) {
-                        for (int i = 0; i < cookies.length; i++) {
-                            if (cookies[i].getName().equals(CommonConstant.TICKET)) {
-                                ticket = cookies[i].getValue();
-                                break;
-                            }
-                        }
+            boolean hasAuth = redisDao.isExist(RedisConstants.getAdminTicketKey(ticket));
+            if(hasAuth){
+                HandlerMethod hm = (HandlerMethod) handler;
+                if(hm.getBean() instanceof BaseController) {
+                    BaseController baseController = (BaseController) hm.getBean();
+                    baseController.cleanLocalThread();
+                    if(StringUtils.isNotBlank(ticket)) {
+                        hasAuth = baseController.hasAuth(ticket);
                     }
                 }
-                if (!baseController.hasAuth(ticket)) {
-                    response.setCharacterEncoding(CommonConstant.CHARSET_UTF8);
-                    response.setContentType("application/json; charset=utf-8");
-                    response.setStatus(HttpServletResponse.SC_OK);
-                    response.getWriter().write(
-                            JSONUtil.toJson(CommonRespData.getInstance().failed(ReturnCodeEnum.ERROR_UNAUTHORIZED)));
-                    return false;
-                }
+                //重置过期时间
+                redisDao.expire(RedisConstants.getAdminTicketKey(ticket), CommonConstant.CacheTime.ADMIN_TICKET);
+            }
+            if (!hasAuth) {
+                response.setCharacterEncoding(CommonConstant.CHARSET_UTF8);
+                response.setContentType("application/json; charset=utf-8");
+                response.setStatus(HttpServletResponse.SC_OK);
+                response.getWriter().write(
+                        JSONUtil.toJson(CommonRespData.getInstance().failed(ReturnCodeEnum.ERROR_UNAUTHORIZED)));
+                return false;
             }
             return super.preHandle(request, response, handler);
         }
-    }
-
-    /**
-     * 查检请求是否在白名单中
-     *
-     * @param path       路径
-     * @param httpMethod 请求方法
-     * @return 在与不在
-     */
-    public static boolean checkIsWhite(String path, String httpMethod) {
-        String signature = CommonUtil.stringAppend(path, SpecialSymbol.COMMA, httpMethod).toString();
-        for (String pattern : WHITE_LIST_WITH_METHOD) {
-            boolean matches = Pattern.matches(pattern, signature);
-            if (matches) {
-                return true;
-            }
-        }
-        return false;
     }
 }
 

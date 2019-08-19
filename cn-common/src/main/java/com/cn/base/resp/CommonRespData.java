@@ -8,7 +8,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @author leixiaoming
+ * @author dengyu
  * @desc 通用返回类的数据结构
  * @date 2018/2/27
  */

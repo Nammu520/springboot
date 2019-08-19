@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <classPathEntry location="C:\Users\555\.m2\repository\mysql\mysql-connector-java\5.1.44\mysql-connector-java-5.1.44.jar"/>
+    <context id="context1">
+        <!-- 是否生成注释 -->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!-- 数据库连接 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/vcl_aggregate"
+                        userId="root" password="123456"/>
+
+        <!-- 生成的包名和工程名 -->
+        <javaModelGenerator targetPackage="com.cn.persist.user.dao"
+                            targetProject="src/main/java"/>
+        <sqlMapGenerator targetPackage="mappers/user"
+                         targetProject="src/main/resources"/>
+        <javaClientGenerator targetPackage="com.cn.persist.user.model"
+                             targetProject="src/main/java" type="XMLMAPPER"/>
+
+        <!-- 数据库表 -->
+        <table tableName="back_menus" domainObjectName="Menus"
+               enableUpdateByExample="false"
+               enableSelectByExample="false" enableDeleteByExample="false" enableCountByExample="false">
+        </table>
+    </context>
+</generatorConfiguration>
