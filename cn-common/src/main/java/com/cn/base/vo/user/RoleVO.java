@@ -23,9 +23,8 @@ public class RoleVO {
     @ApiModelProperty(value = "角色名", example = "技术支持")
     private String name;
 
-    @ApiModelProperty(value = "角色创建时间", example = "2019-02-12 23:59:12")
+    @ApiModelProperty(name = "create_time", value = "角色创建时间", example = "2019-02-12 23:59:12")
     @JsonSerialize(using = RoleVO.IntDate2LongDate.class)
-    @JsonProperty(value = "create_time")
     private Date createTime;
 
     public static class IntDate2LongDate extends JsonSerializer<Date> {

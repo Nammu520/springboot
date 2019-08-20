@@ -1,13 +1,12 @@
 package com.cn.service.user.impl;
 
-import com.cn.base.config.LocaleMessageSourceService;
 import com.cn.base.config.RedisDao;
 import com.cn.base.constant.CommonConstant;
 import com.cn.base.constant.RedisConstants;
 import com.cn.base.dto.user.BackendUserLoginReqDto;
 import com.cn.base.exception.SysException;
 import com.cn.base.exception.WrongTokenException;
-import com.cn.base.resp.ReturnCodeEnum;
+import com.cn.base.enums.ReturnCodeEnum;
 import com.cn.base.util.CookieUtil;
 import com.cn.base.util.PasswordUtil;
 import com.cn.base.util.UserTokenUtil;

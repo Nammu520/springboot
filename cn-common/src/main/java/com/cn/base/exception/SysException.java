@@ -1,6 +1,6 @@
 package com.cn.base.exception;
 
-import com.cn.base.resp.ReturnCodeEnum;
+import com.cn.base.enums.ReturnCodeEnum;
 import lombok.Data;
 
 @Data

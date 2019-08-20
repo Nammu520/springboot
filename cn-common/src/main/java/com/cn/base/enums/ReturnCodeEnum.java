@@ -1,4 +1,4 @@
-package com.cn.base.resp;
+package com.cn.base.enums;
 
 /**
  * @author dengyu

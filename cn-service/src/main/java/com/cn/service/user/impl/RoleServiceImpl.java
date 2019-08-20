@@ -1,9 +1,9 @@
 package com.cn.service.user.impl;
 
-import com.cn.base.config.LocaleMessageSourceService;
 import com.cn.base.dto.user.BackendRoleReqDto;
 import com.cn.base.exception.SysException;
-import com.cn.base.resp.ReturnCodeEnum;
+import com.cn.base.dto.resp.PageData;
+import com.cn.base.enums.ReturnCodeEnum;
 import com.cn.base.vo.user.MenuTempleVO;
 import com.cn.base.vo.user.RoleMenuTreeVO;
 import com.cn.base.vo.user.RoleVO;
@@ -19,7 +19,6 @@ import com.cn.service.user.RoleService;
 import com.cn.service.util.FunctionTreeUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
@@ -68,7 +67,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public PageInfo<RoleVO> list(BackendRoleReqDto param){
+    public PageData<RoleVO> list(BackendRoleReqDto param){
        Page page = PageHelper.startPage(param.getPageNum(), param.getPageSize());
        List<BackendRole> roles =  roleMapper.selectByParams(param.getName());
        List<RoleVO> roleVOS = new ArrayList<>();
@@ -77,12 +76,10 @@ public class RoleServiceImpl implements RoleService {
            BeanUtils.copyProperties(role, roleVo);
            roleVOS.add(roleVo);
        });
-        PageInfo<RoleVO> pageInfo = new PageInfo<>();
-        pageInfo.setTotal(page.getTotal());
-        pageInfo.setPageNum(param.getPageNum());
-        pageInfo.setPageSize(param.getPageSize());
-        pageInfo.setList(roleVOS);
-        return pageInfo;
+        PageData<RoleVO> pageData = new PageData<>();
+        pageData.setCount(page.getTotal());
+        pageData.setContent(roleVOS);
+        return pageData;
     }
 
     @Override

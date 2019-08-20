@@ -1,16 +1,12 @@
-package com.cn.base.resp;
+package com.cn.base.dto.resp;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.cn.base.enums.ReturnCodeEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @author dengyu
@@ -42,13 +38,6 @@ public class RespData<T> implements Serializable {
 
     public RespData<T> genRespData(int code, T data, String msg) {
         if (data != null) {
-            if(data instanceof PageInfo) {
-                PageInfo pageInfo = (PageInfo) data;
-                RespData.PageData pageData = new RespData.PageData<>();
-                pageData.setResults(pageInfo.getList());
-                pageData.setCount(pageInfo.getTotal());
-                this.data = (T) pageData;
-            }
             this.data = data;
         } else {
             this.data = (T) new Object();
@@ -91,13 +80,5 @@ public class RespData<T> implements Serializable {
      */
     public RespData<T> failed(ReturnCodeEnum returnCodeEnum, String msg) {
         return genRespData(returnCodeEnum.getCode(), null, msg);
-    }
-
-    @Data
-    public static class PageData<T> implements Serializable {
-        @ApiModelProperty(name = "results", value = "响应对象")
-        private T results;
-        @ApiModelProperty(name = "count", value = "数据条数")
-        private long count;
     }
 }

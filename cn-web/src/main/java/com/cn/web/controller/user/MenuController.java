@@ -1,6 +1,6 @@
 package com.cn.web.controller.user;
 
-import com.cn.base.resp.RespData;
+import com.cn.base.dto.resp.RespData;
 import com.cn.base.vo.user.MenuTempleVO;
 import com.cn.service.user.MenuService;
 import io.swagger.annotations.Api;

@@ -1,6 +1,5 @@
 package com.cn.base.vo.user;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -21,8 +20,7 @@ public class MenuTempleVO implements Serializable {
     /**
      * 父级code
      */
-    @ApiModelProperty(value = "父级code", example = "001")
-    @JsonProperty(value = "parent_code")
+    @ApiModelProperty(name = "p_code", value = "父级code", example = "001")
     private String pCode;
 
     /**
@@ -40,8 +38,7 @@ public class MenuTempleVO implements Serializable {
     /**
      * 是否勾选该功能 0:否 1:是
      */
-    @ApiModelProperty(value = "是否勾选该功能 0:否 1:是", example = "true")
-    @JsonProperty(value = "check_flag")
+    @ApiModelProperty(name = "check_flag", value = "是否勾选该功能 0:否 1:是", example = "true")
     private Boolean checkFlag;
 
     /**

@@ -1,6 +1,6 @@
 package com.cn.base.config;
 
-import com.cn.base.resp.ReturnCodeEnum;
+import com.cn.base.enums.ReturnCodeEnum;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;

@@ -1,6 +1,6 @@
 package com.cn.web.controller.user;
 
-import com.cn.base.resp.RespData;
+import com.cn.base.dto.resp.RespData;
 import com.cn.service.user.AuthService;
 import com.cn.web.controller.BaseController;
 import com.cn.base.dto.user.BackendUserLoginReqDto;

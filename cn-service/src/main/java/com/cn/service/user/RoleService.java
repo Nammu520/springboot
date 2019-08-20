@@ -2,9 +2,9 @@ package com.cn.service.user;
 
 
 import com.cn.base.dto.user.BackendRoleReqDto;
+import com.cn.base.dto.resp.PageData;
 import com.cn.base.vo.user.RoleMenuTreeVO;
 import com.cn.base.vo.user.RoleVO;
-import com.github.pagehelper.PageInfo;
 
 public interface RoleService {
 
@@ -20,7 +20,7 @@ public interface RoleService {
      *
      * @param param 查询参数
      */
-    PageInfo<RoleVO> list(BackendRoleReqDto param);
+    PageData<RoleVO> list(BackendRoleReqDto param);
 
     /**
      * 角色详情

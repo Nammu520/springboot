@@ -2,7 +2,7 @@ package com.cn.service.user.impl;
 
 import com.cn.base.config.LocaleMessageSourceService;
 import com.cn.base.exception.SysException;
-import com.cn.base.resp.ReturnCodeEnum;
+import com.cn.base.enums.ReturnCodeEnum;
 import com.cn.base.vo.user.MenuTempleVO;
 import com.cn.persist.user.dao.BackendMenuMapper;
 import com.cn.persist.user.model.BackendMenu;
