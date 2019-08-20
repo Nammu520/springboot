@@ -1,9 +1,7 @@
 package com.cn.web.aspect;
 
-import com.cn.base.constant.CommonConstant;
 import com.cn.base.constant.SpecialSymbol;
 import com.cn.base.exception.SysException;
-import com.cn.base.util.CommonUtil;
 import com.cn.web.controller.BaseController;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;

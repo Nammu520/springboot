@@ -24,18 +24,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <excludes>
-                    <exclude>config/</exclude>
-                </excludes>
-            </resource>
-            <resource>
-                <directory>src/main/resources/config/${profiles.active}</directory>
-                <targetPath>.</targetPath>
-            </resource>
-        </resources>
     </build>
 
     <dependencies>
@@ -63,6 +51,14 @@
         <dependency>
             <groupId>com.cn</groupId>
             <artifactId>cn-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
     </dependencies>
 

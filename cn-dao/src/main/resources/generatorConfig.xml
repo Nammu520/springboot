@@ -15,15 +15,15 @@
                         userId="root" password="123456"/>
 
         <!-- 生成的包名和工程名 -->
-        <javaModelGenerator targetPackage="com.cn.persist.user.dao"
+        <javaModelGenerator targetPackage="com.cn.persist.user.model"
                             targetProject="src/main/java"/>
         <sqlMapGenerator targetPackage="mappers/user"
                          targetProject="src/main/resources"/>
-        <javaClientGenerator targetPackage="com.cn.persist.user.model"
+        <javaClientGenerator targetPackage="com.cn.persist.user.dao"
                              targetProject="src/main/java" type="XMLMAPPER"/>
 
         <!-- 数据库表 -->
-        <table tableName="back_menus" domainObjectName="Menus"
+        <table tableName="back_role_menu" domainObjectName="BackendRoleMenu"
                enableUpdateByExample="false"
                enableSelectByExample="false" enableDeleteByExample="false" enableCountByExample="false">
         </table>

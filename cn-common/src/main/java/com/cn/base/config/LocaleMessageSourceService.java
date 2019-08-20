@@ -22,7 +22,7 @@ public class LocaleMessageSourceService {
      * @return String
      */
     public String getMessage(ReturnCodeEnum returnCodeEnum) {
-        return getMessage(String.valueOf(returnCodeEnum.getCode()), null);
+        return getMessage(String.valueOf(returnCodeEnum.getCode()), null, returnCodeEnum.getMessage());
     }
 
     /**
@@ -49,7 +49,7 @@ public class LocaleMessageSourceService {
      * @return String
      */
     public String getMessage(String code, Object[] args) {
-        return getMessage(code, args, "");
+        return getMessage(code, args, null);
     }
 
     /**

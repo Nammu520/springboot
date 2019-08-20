@@ -4,7 +4,7 @@ import com.cn.base.config.LocaleMessageSourceService;
 import com.cn.base.config.RedisDao;
 import com.cn.base.exception.SysException;
 import com.cn.base.resp.ReturnCodeEnum;
-import com.cn.service.AuthService;
+import com.cn.service.user.AuthService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

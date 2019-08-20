@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -41,6 +42,13 @@ public class RespData<T> implements Serializable {
 
     public RespData<T> genRespData(int code, T data, String msg) {
         if (data != null) {
+            if(data instanceof PageInfo) {
+                PageInfo pageInfo = (PageInfo) data;
+                RespData.PageData pageData = new RespData.PageData<>();
+                pageData.setResults(pageInfo.getList());
+                pageData.setCount(pageInfo.getTotal());
+                this.data = (T) pageData;
+            }
             this.data = data;
         } else {
             this.data = (T) new Object();
@@ -74,47 +82,22 @@ public class RespData<T> implements Serializable {
         return genRespData(codeEnum.getCode(), data, msg);
     }
 
+    /**
+     * 生成默认错误返回数据
+     *
+     * @param returnCodeEnum 错误码枚举
+     * @param msg            消息内容
+     * @return 响应数据
+     */
+    public RespData<T> failed(ReturnCodeEnum returnCodeEnum, String msg) {
+        return genRespData(returnCodeEnum.getCode(), null, msg);
+    }
+
     @Data
     public static class PageData<T> implements Serializable {
-        @ApiModelProperty(name = "results", value = "分页数据")
-        private List<T> results;
-        @ApiModelProperty(name = "next", value = "下一页链接（android特供），如果下一页没有数据则为null", example = "http://127.0.0.1/getdata?page=2")
-        private String next;
-        @ApiModelProperty(name = "previous", value = "上一页链接（android特供），如果上一页没有数据则为null", example = "http://127.0.0.1/getdata?page=1")
-        private String previous;
-        @ApiModelProperty(name = "count", value = "数据条数")
-        private long count;
-        @JsonIgnore
-        private int size;
-    }
-
-    @Data
-    public static class PageData2<T> implements Serializable {
-        @ApiModelProperty(name = "results", value = "响应对象（只是为了适应接口：获取问题回答列表）")
-        private T results;
-        @ApiModelProperty(name = "next", value = "下一页链接（android特供），如果下一页没有数据则为null")
-        private String next;
-        @ApiModelProperty(name = "previous", value = "上一页链接（android特供），如果上一页没有数据则为null")
-        private String previous;
-        @ApiModelProperty(name = "count", value = "数据条数")
-        private long count;
-        @JsonIgnore
-        private int size;
-    }
-
-    @Data
-    public static class PageData3<T> extends PageData {
-        @JsonProperty(value = "service_phone")
-        private String servicePhone;
-    }
-
-    @Data
-    public static class PageDataSimple<T> implements Serializable {
         @ApiModelProperty(name = "results", value = "响应对象")
         private T results;
         @ApiModelProperty(name = "count", value = "数据条数")
         private long count;
-        @JsonIgnore
-        private int size;
     }
 }

@@ -5,12 +5,12 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class Menus {
+public class BackendMenu {
     private Integer id;
 
     private String name;
 
-    private Byte level;
+    private Integer level;
 
     private String url;
 
@@ -18,7 +18,7 @@ public class Menus {
 
     private String pCode;
 
-    private Byte type;
+    private Integer type;
 
     private String remarks;
 

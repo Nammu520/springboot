@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cn.persist.user.dao.MenusMapper">
-  <resultMap id="BaseResultMap" type="com.cn.persist.user.model.Menus">
+<mapper namespace="com.cn.persist.user.dao.BackendMenuMapper">
+  <resultMap id="BaseResultMap" type="com.cn.persist.user.model.BackendMenu">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="level" jdbcType="TINYINT" property="level" />
+    <result column="level" jdbcType="INTEGER" property="level" />
     <result column="url" jdbcType="VARCHAR" property="url" />
     <result column="code" jdbcType="VARCHAR" property="code" />
     <result column="p_code" jdbcType="VARCHAR" property="pCode" />
-    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="type" jdbcType="INTEGER" property="type" />
     <result column="remarks" jdbcType="VARCHAR" property="remarks" />
     <result column="is_active" jdbcType="BIT" property="isActive" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -27,7 +27,7 @@
     delete from back_menus
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.cn.persist.user.model.Menus">
+  <insert id="insert" parameterType="com.cn.persist.user.model.BackendMenu">
     insert into back_menus (id, name, level, 
       url, code, p_code, type, 
       remarks, is_active, create_time, 
@@ -37,7 +37,7 @@
       #{remarks,jdbcType=VARCHAR}, #{isActive,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.cn.persist.user.model.Menus">
+  <insert id="insertSelective" parameterType="com.cn.persist.user.model.BackendMenu">
     insert into back_menus
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -110,7 +110,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cn.persist.user.model.Menus">
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.persist.user.model.BackendMenu">
     update back_menus
     <set>
       <if test="name != null">
@@ -146,7 +146,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cn.persist.user.model.Menus">
+  <update id="updateByPrimaryKey" parameterType="com.cn.persist.user.model.BackendMenu">
     update back_menus
     set name = #{name,jdbcType=VARCHAR},
       level = #{level,jdbcType=TINYINT},
@@ -160,4 +160,16 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectListByParams" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from back_menus
+    where is_active = 1
+    <if test="roleId != null">
+      and id in
+      (
+        select menu_id from back_role_menu where is_active = 1 and role_id = #{roleId,jdbcType=INTEGER}
+      )
+    </if>
+  </select>
 </mapper>

@@ -3,10 +3,8 @@ package com.cn.web.filter;
 import com.cn.base.config.RedisDao;
 import com.cn.base.constant.CommonConstant;
 import com.cn.base.constant.RedisConstants;
-import com.cn.base.constant.SpecialSymbol;
-import com.cn.base.resp.CommonRespData;
+import com.cn.base.resp.RespData;
 import com.cn.base.resp.ReturnCodeEnum;
-import com.cn.base.util.CommonUtil;
 import com.cn.base.util.CookieUtil;
 import com.cn.base.util.JSONUtil;
 import com.cn.web.controller.BaseController;
@@ -21,12 +19,8 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Pattern;
 
 /**
  * @author dengyu
@@ -97,7 +91,7 @@ public class SecurityInterceptor extends WebMvcConfigurerAdapter {
                 response.setContentType("application/json; charset=utf-8");
                 response.setStatus(HttpServletResponse.SC_OK);
                 response.getWriter().write(
-                        JSONUtil.toJson(CommonRespData.getInstance().failed(ReturnCodeEnum.ERROR_UNAUTHORIZED)));
+                        JSONUtil.toJson(RespData.getInstance().failed(ReturnCodeEnum.ERROR_UNAUTHORIZED)));
                 return false;
             }
             return super.preHandle(request, response, handler);

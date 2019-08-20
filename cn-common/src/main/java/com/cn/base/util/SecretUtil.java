@@ -9,7 +9,7 @@ import java.security.SecureRandom;
 
 /**
  * @desc: 功能简述: 加密解密工具类
- * @author: zhangwanquan
+ * @author: dengyu
  * @date: 2019/4/24
  */
 public final class SecretUtil {

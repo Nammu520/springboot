@@ -1,15 +1,19 @@
 package com.cn.web.controller.user;
 
 import com.cn.base.resp.RespData;
-import com.cn.service.AuthService;
+import com.cn.service.user.AuthService;
 import com.cn.web.controller.BaseController;
+import com.cn.base.dto.user.BackendUserLoginReqDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 /**
  * 用户鉴权
@@ -44,13 +48,11 @@ public class AuthController extends BaseController {
      *
      * @return RespData
      */
-    @ApiOperation(value = "登出", notes = "登出")
+    @ApiOperation(value = "登录", notes = "登出")
     @PostMapping("/login/")
-    public RespData login() {
-        // TODO 判断账号密码是否正确
-        Integer userId = 1;
+    public RespData login(@RequestBody @Valid BackendUserLoginReqDto userLoginReqDto) {
         // 生成ticket
-        authService.login(userId);
+        authService.login(userLoginReqDto);
         return RespData.getInstance().success();
     }
 }

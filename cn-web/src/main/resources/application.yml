@@ -6,7 +6,14 @@ server:
         worker-threads: 20
         buffer-size: 1024
         direct-buffers: true
+    tomcat:
+        uri-encoding: UTF-8
 spring:
+    http:
+        encoding:
+            force: true
+            charset: UTF-8
+            enabled: true
     redis:
         hostName: 127.0.0.1
         port: 6379
@@ -19,13 +26,21 @@ spring:
             minIdle: 0
         timeout: 0
     datasource:
-        url: jdbc:mysql://127.0.0.1:3306/vcl_aggregate
+        type: com.zaxxer.hikari.HikariDataSource
+        url:  jdbc:mysql://127.0.0.1:3306/vcl_aggregate
         username: root
         password: 123456
-        driverClassName: com.mysql.jdbc.Driver
+        driver-class-name: com.mysql.jdbc.Driver
         hikari:
-            maximum-pool-size: 5
-            max-lifetime: 28800
-            idle-timeout: 28800
+            maximum-pool-size: 20
+            max-lifetime: 60
+            idle-timeout: 60
             connection-test-query: SELECT 1 FROM DUAL
             auto-commit: false
+
+mybatis:
+    type-aliases-package: com.cn.persist.*.model
+    mapper-locations: classpath*:/mappers/**/*.xml
+    config-location: classpath:mybatis-config.xml
+
+

@@ -23,10 +23,22 @@ public enum ReturnCodeEnum {
 
     ERROR_TIMEOUT(408, "请求超时，请稍后再试"),
 
+    ERR_PARAM_ERROR(421, "参数错误"),
+
     ERROR_INTERNAL_SERVER(500, "操作失败，请稍后再试"),
 
-    // 鉴权模块
-    ERROR_GENERATE_TOKEN(10001, "生成全局token异常");
+    // 用户模块
+    ERROR_GENERATE_TOKEN(10001, "生成全局token异常"),
+
+    ERROR_GET_MEUN_LIST(10002 ,"获取菜单模板为空"),
+
+    ERROR_USER_NOT_EXIST(10003, "用户不存在"),
+
+    ERROR_USERNAME_OR_PASSWORD(10004, "账号或密码错误"),
+
+    ERROR_ROLE_NOT_EXIST(10005, "角色不存在"),
+
+    ERROR_ROLE_BIND_USER(10006, "角色已绑定用户");
 
     private int code;
 
