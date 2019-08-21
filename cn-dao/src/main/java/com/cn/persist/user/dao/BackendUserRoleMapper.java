@@ -22,4 +22,6 @@ public interface BackendUserRoleMapper {
     int updateByPrimaryKey(BackendUserRole record);
 
     List<BackendUserRole> selectByRoleId(@Param("roleId") Integer roleId);
+
+    BackendUserRole selectByUserId(@Param("userId") Integer userId);
 }
