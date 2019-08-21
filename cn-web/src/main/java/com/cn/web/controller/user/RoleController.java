@@ -1,8 +1,9 @@
 package com.cn.web.controller.user;
 
-import com.cn.base.dto.user.BackendRoleReqDto;
+import com.cn.base.dto.user.BackendRoleReqDTO;
 import com.cn.base.dto.resp.PageData;
 import com.cn.base.dto.resp.RespData;
+import com.cn.base.dto.user.SaveRoleReqDTO;
 import com.cn.base.vo.user.RoleMenuTreeVO;
 import com.cn.base.vo.user.RoleVO;
 import com.cn.service.user.RoleService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,7 +43,7 @@ public class RoleController {
 
     @ApiOperation(value = "获取角色列表", notes = "获取角色列表")
     @GetMapping("/list/")
-    public RespData<PageData<RoleVO>> list(@Valid BackendRoleReqDto param) {
+    public RespData<PageData<RoleVO>> list(@Valid BackendRoleReqDTO param) {
         PageData<RoleVO> pageInfo = roleService.list(param);
         return RespData.getInstance().success(pageInfo);
     }
@@ -54,7 +56,8 @@ public class RoleController {
 
     @ApiOperation(value = "保存角色", notes = "保存角色")
     @PostMapping("/save_role/")
-    public RespData saveRole(){
+    public RespData saveRole(@RequestBody @Valid SaveRoleReqDTO param){
+        roleService.saveRole(param);
         return RespData.getInstance().success();
     }
 }

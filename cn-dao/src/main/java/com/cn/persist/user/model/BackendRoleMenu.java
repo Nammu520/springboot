@@ -11,4 +11,8 @@ public class BackendRoleMenu extends BackendRoleMenuKey {
     private Date createTime;
 
     private Date updateTime;
+
+    public BackendRoleMenu(Integer roleId, Integer menuId){
+        super(roleId, menuId);
+    }
 }

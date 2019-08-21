@@ -102,4 +102,11 @@
     where role_id = #{roleId,jdbcType=INTEGER}
     and is_active = 1
   </select>
+    <insert id="insertBatch" parameterType="List">
+        insert into back_role_menu (role_id, menu_id)
+        values
+        <foreach collection="list" item="item" separator=",">
+          (#{item.roleId},#{item.menuId})
+        </foreach>
+    </insert>
 </mapper>

@@ -38,7 +38,9 @@ public enum ReturnCodeEnum {
 
     ERROR_ROLE_NOT_EXIST(10005, "角色不存在"),
 
-    ERROR_ROLE_BIND_USER(10006, "角色已绑定用户");
+    ERROR_ROLE_BIND_USER(10006, "角色已绑定用户"),
+
+    ERROR_ROLE_NAME_REPEAT(10007, "角色名重复");
 
     private int code;
 

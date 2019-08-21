@@ -1,6 +1,7 @@
 package com.cn.service.user.impl;
 
-import com.cn.base.dto.user.BackendRoleReqDto;
+import com.cn.base.dto.user.BackendRoleReqDTO;
+import com.cn.base.dto.user.SaveRoleReqDTO;
 import com.cn.base.exception.SysException;
 import com.cn.base.dto.resp.PageData;
 import com.cn.base.enums.ReturnCodeEnum;
@@ -14,6 +15,7 @@ import com.cn.persist.user.dao.BackendUserRoleMapper;
 import com.cn.persist.user.model.BackendMenu;
 import com.cn.persist.user.model.BackendRole;
 import com.cn.persist.user.model.BackendRoleMenu;
+import com.cn.persist.user.model.BackendRoleMenuKey;
 import com.cn.persist.user.model.BackendUserRole;
 import com.cn.service.user.RoleService;
 import com.cn.service.util.FunctionTreeUtil;
@@ -28,7 +30,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -67,9 +71,11 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public PageData<RoleVO> list(BackendRoleReqDto param){
+    public PageData<RoleVO> list(BackendRoleReqDTO param){
+       Map<String, Object> sqlParams = new HashMap<>();
+       sqlParams.put("nameLike", param.getNameLike());
        Page page = PageHelper.startPage(param.getPageNum(), param.getPageSize());
-       List<BackendRole> roles =  roleMapper.selectByParams(param.getName());
+       List<BackendRole> roles =  roleMapper.selectByParams(sqlParams);
        List<RoleVO> roleVOS = new ArrayList<>();
        roles.stream().forEach(role -> {
            RoleVO roleVo = new RoleVO();
@@ -98,5 +104,41 @@ public class RoleServiceImpl implements RoleService {
         List<MenuTempleVO> menuTree = FunctionTreeUtil.buildFunctionTree(menus, menusId);
         result.setMenuTree(menuTree);
         return result;
+    }
+
+    @Transactional
+    @Override
+    public void saveRole(SaveRoleReqDTO param){
+        /**校验角色名是否重复**/
+        Map<String, Object> sqlParams = new HashMap<>();
+        sqlParams.put("name", param.getName());
+        List<BackendRole> roles =  roleMapper.selectByParams(sqlParams);
+        if(CollectionUtils.isNotEmpty(
+                roles.stream().filter(role-> !role.getId().equals(param.getId())).collect(Collectors.toList()))) {
+            throw new SysException(ReturnCodeEnum.ERROR_ROLE_NAME_REPEAT);
+        }
+        // 组装数据
+        FunctionTreeUtil.checkNode(param.getMenuTree());
+        // 获取菜单id
+        Set<Integer> menuIds = new HashSet<>();
+        FunctionTreeUtil.dfsFunctionTree(param.getMenuTree(), menuIds);
+        // 判断新增还是修改
+        BackendRole role = new BackendRole();
+        role.setName(param.getName());
+        if(param.getId() != null) { //修改
+            roleMenuMapper.deleteByRoleId(param.getId());
+            // 修改角色名
+            role.setId(param.getId());
+            roleMapper.updateByPrimaryKeySelective(role);
+        } else{
+            // 保存角色信息
+            roleMapper.insertSelective(role);
+        }
+        // 批量新增角色菜单管理关系
+        if(CollectionUtils.isNotEmpty(menuIds)) {
+            List<BackendRoleMenuKey> insertList = new ArrayList<>();
+            menuIds.stream().forEach(menuId -> insertList.add(new BackendRoleMenuKey(role.getId(), menuId)));
+            roleMenuMapper.insertBatch(insertList);
+        }
     }
 }

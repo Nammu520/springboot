@@ -3,7 +3,7 @@ package com.cn.service.user.impl;
 import com.cn.base.config.RedisDao;
 import com.cn.base.constant.CommonConstant;
 import com.cn.base.constant.RedisConstants;
-import com.cn.base.dto.user.BackendUserLoginReqDto;
+import com.cn.base.dto.user.BackendUserLoginReqDTO;
 import com.cn.base.exception.SysException;
 import com.cn.base.exception.WrongTokenException;
 import com.cn.base.enums.ReturnCodeEnum;
@@ -60,7 +60,7 @@ public class AuthServiceImpl implements AuthService {
      * @param userLoginReqDto 用户登录对象
      */
     @Override
-    public void login(BackendUserLoginReqDto userLoginReqDto) {
+    public void login(BackendUserLoginReqDTO userLoginReqDto) {
         // 校验账号密码是否正确
         BackendUser backendUser = backendUserMapper.selectByUsername(userLoginReqDto.getUsername());
         if(backendUser == null){

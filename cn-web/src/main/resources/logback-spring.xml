@@ -33,6 +33,9 @@
         </triggeringPolicy>
     </appender>
 
+    <logger name="mapper" level="debug" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
     <!-- Logger 根目录 -->
     <root level="INFO">
         <appender-ref ref="STDOUT"/>

@@ -2,9 +2,9 @@ package com.cn.persist.user.dao;
 
 import com.cn.persist.user.model.BackendRole;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface BackendRoleMapper {
@@ -20,5 +20,5 @@ public interface BackendRoleMapper {
 
     int updateByPrimaryKey(BackendRole record);
 
-    List<BackendRole> selectByParams(@Param("name") String name);
+    List<BackendRole> selectByParams(Map<String, Object> params);
 }

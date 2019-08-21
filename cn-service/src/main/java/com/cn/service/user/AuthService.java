@@ -1,6 +1,6 @@
 package com.cn.service.user;
 
-import com.cn.base.dto.user.BackendUserLoginReqDto;
+import com.cn.base.dto.user.BackendUserLoginReqDTO;
 
 public interface AuthService {
 
@@ -24,5 +24,5 @@ public interface AuthService {
      *
      * @param userLoginReqDto 用户登录对象
      */
-    void login(BackendUserLoginReqDto userLoginReqDto);
+    void login(BackendUserLoginReqDTO userLoginReqDto);
 }

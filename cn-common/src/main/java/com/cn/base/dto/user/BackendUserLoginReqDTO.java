@@ -15,14 +15,14 @@ import java.io.Serializable;
  */
 @Data
 @ApiModel(value = "用户账号登录请求对象")
-public class BackendUserLoginReqDto implements Serializable {
+public class BackendUserLoginReqDTO implements Serializable {
     @JsonProperty("username")
     @ApiModelProperty(value = "用户名", example = "AdminUser")
-    @NotBlank(field = "用户名")
+    @NotBlank(field = "用户名", message = "用户名为空")
     private String username;
 
     @JsonProperty("password")
     @ApiModelProperty(value = "密码", example = "123456")
-    @NotBlank(field = "密码")
+    @NotBlank(field = "密码", message = "密码为空")
     private String password;
 }

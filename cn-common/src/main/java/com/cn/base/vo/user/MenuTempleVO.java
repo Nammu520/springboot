@@ -12,6 +12,12 @@ import java.util.List;
 public class MenuTempleVO implements Serializable {
 
     /**
+     * 菜单id
+     */
+    @ApiModelProperty(value = "菜单id", example = "1")
+    private Integer id;
+
+    /**
      * 给页面元素分配的唯一标识
      */
     @ApiModelProperty(value = "菜单唯一code", example = "001001")

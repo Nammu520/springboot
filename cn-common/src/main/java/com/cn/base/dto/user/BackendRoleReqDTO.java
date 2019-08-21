@@ -6,9 +6,9 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
-public class BackendRoleReqDto extends PageReqDTO {
+public class BackendRoleReqDTO extends PageReqDTO {
 
-    @ApiModelProperty(name = "name", value = "角色名")
+    @ApiModelProperty(name = "name_like", value = "模糊查询角色名")
     @MaxLength(max = 10, message = "输入的角色名长度大于5")
-    private String name;
+    private String nameLike;
 }

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Set;
 
 @Mapper
 public interface BackendRoleMenuMapper {
@@ -24,4 +25,6 @@ public interface BackendRoleMenuMapper {
     int deleteByRoleId(@Param("roleId") Integer roleId);
 
     List<BackendRoleMenu> selectByRoleId(@Param("roleId") Integer roleId);
+
+    int insertBatch(List<BackendRoleMenuKey> records);
 }

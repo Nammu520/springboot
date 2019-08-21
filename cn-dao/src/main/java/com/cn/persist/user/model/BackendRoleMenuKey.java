@@ -7,4 +7,9 @@ public class BackendRoleMenuKey {
     private Integer roleId;
 
     private Integer menuId;
+
+    public BackendRoleMenuKey(Integer roleId, Integer menuId) {
+        this.roleId = roleId;
+        this.menuId = menuId;
+    }
 }
