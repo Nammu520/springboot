@@ -39,7 +39,7 @@
         <springfox.version>2.9.0</springfox.version>
         <mysql-connector.version>5.1.46</mysql-connector.version>
         <hikaricp.version>3.1.0</hikaricp.version>
-        <httpclient.version>4.4.1</httpclient.version>
+        <httpclient.version>4.5.13</httpclient.version>
         <guava.version>20.0</guava.version>
         <servlet-api.version>3.1.0</servlet-api.version>
         <poi.version>3.16</poi.version>
